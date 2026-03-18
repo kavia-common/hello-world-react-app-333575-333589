@@ -59,6 +59,8 @@ export default function ContentInfoScreen() {
   const publicUrl = process.env.PUBLIC_URL || "";
 
   const bgSrc = `${publicUrl}/assets/node-1-539/background.png`;
+  // User-provided PNG is placed at public/assets/node-1-539/background.png
+  // and served at /assets/node-1-539/background.png at runtime via CRA public folder.
   const gradientSrc = `${publicUrl}/assets/node-1-539/gradient_horizontal_full.svg`;
 
   const bgStatus = useImageStatus(bgSrc);
