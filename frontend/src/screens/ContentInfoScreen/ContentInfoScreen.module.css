@@ -8,30 +8,26 @@
 
 /*
   IMPORTANT:
-  - Do NOT use absolute URLs like url("/assets/...") in CSS modules with CRA,
+  - Do NOT use url() in CSS modules with CRA for runtime-constructed paths,
     because css-loader will try to resolve them at build time and fail.
-  - Instead, construct the URL at runtime using a CSS variable set in JS:
-      style={{ "--public-url": process.env.PUBLIC_URL || "" }}
+  - Background images using PUBLIC_URL are applied via inline styles in the
+    React component instead, so they are resolved at runtime only.
   - The assets must live under /public/assets/... so they are served statically.
 */
 
-/* Background image (1920x1080) */
+/* Background image (1920x1080) — background-image is set via inline style in JS */
 .bg {
   position: absolute;
   inset: 0;
-  background-image: url(var(--public-url)/assets/node-1-539/background.png);
   background-size: cover;
   background-position: center;
   transform: scale(1.001); /* avoid seams on some GPUs */
 }
 
-/* Gradient overlay svg (1920x1080) */
+/* Gradient overlay svg (1920x1080) — background-image is set via inline style in JS */
 .gradient {
   position: absolute;
   inset: 0;
-  background-image: url(
-    var(--public-url)/assets/node-1-539/gradient_horizontal_full.svg
-  );
   background-size: cover;
   background-position: center;
   pointer-events: none;

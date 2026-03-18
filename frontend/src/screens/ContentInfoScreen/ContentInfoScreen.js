@@ -3,16 +3,31 @@ import styles from "./ContentInfoScreen.module.css";
 
 // PUBLIC_INTERFACE
 export default function ContentInfoScreen() {
-  /** Pixel-precise implementation of Figma node 1:539 (OTT App - Content Info). */
+  /**
+   * Pixel-precise implementation of Figma node 1:539 (OTT App - Content Info).
+   *
+   * Background images are applied via inline styles so that process.env.PUBLIC_URL
+   * is resolved at runtime. Using url() inside CSS modules would cause css-loader
+   * to attempt build-time resolution and fail for dynamically-constructed paths.
+   */
+  const publicUrl = process.env.PUBLIC_URL || "";
+
+  const bgStyle = {
+    backgroundImage: `url(${publicUrl}/assets/node-1-539/background.png)`,
+  };
+
+  const gradientStyle = {
+    backgroundImage: `url(${publicUrl}/assets/node-1-539/gradient_horizontal_full.svg)`,
+  };
+
   return (
     <div
       className={styles.stage}
-      style={{ "--public-url": process.env.PUBLIC_URL || "" }}
       aria-label="Content info screen"
     >
-      {/* Background layers (assets expected at /public/assets/...) */}
-      <div className={styles.bg} aria-hidden="true" />
-      <div className={styles.gradient} aria-hidden="true" />
+      {/* Background layers (assets served from /public/assets/node-1-539/) */}
+      <div className={styles.bg} style={bgStyle} aria-hidden="true" />
+      <div className={styles.gradient} style={gradientStyle} aria-hidden="true" />
 
       {/* Top-right clock/date */}
       <div className={styles.systemInfo} aria-label="System time and date">
