@@ -5,7 +5,11 @@ import styles from "./ContentInfoScreen.module.css";
 export default function ContentInfoScreen() {
   /** Pixel-precise implementation of Figma node 1:539 (OTT App - Content Info). */
   return (
-    <div className={styles.stage} aria-label="Content info screen">
+    <div
+      className={styles.stage}
+      style={{ "--public-url": process.env.PUBLIC_URL || "" }}
+      aria-label="Content info screen"
+    >
       {/* Background layers (assets expected at /public/assets/...) */}
       <div className={styles.bg} aria-hidden="true" />
       <div className={styles.gradient} aria-hidden="true" />

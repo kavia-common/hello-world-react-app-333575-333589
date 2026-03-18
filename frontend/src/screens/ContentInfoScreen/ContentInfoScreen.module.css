@@ -10,7 +10,7 @@
 .bg {
   position: absolute;
   inset: 0;
-  background-image: url("/assets/node-1-539/background.png");
+  background-image: url(var(--public-url) "/assets/node-1-539/background.png");
   background-size: cover;
   background-position: center;
   transform: scale(1.001); /* avoid seams on some GPUs */
@@ -20,7 +20,9 @@
 .gradient {
   position: absolute;
   inset: 0;
-  background-image: url("/assets/node-1-539/gradient_horizontal_full.svg");
+  background-image: url(
+    var(--public-url) "/assets/node-1-539/gradient_horizontal_full.svg"
+  );
   background-size: cover;
   background-position: center;
   pointer-events: none;
