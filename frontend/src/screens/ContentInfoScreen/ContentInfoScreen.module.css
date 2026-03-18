@@ -6,11 +6,20 @@
   background: #000;
 }
 
+/*
+  IMPORTANT:
+  - Do NOT use absolute URLs like url("/assets/...") in CSS modules with CRA,
+    because css-loader will try to resolve them at build time and fail.
+  - Instead, construct the URL at runtime using a CSS variable set in JS:
+      style={{ "--public-url": process.env.PUBLIC_URL || "" }}
+  - The assets must live under /public/assets/... so they are served statically.
+*/
+
 /* Background image (1920x1080) */
 .bg {
   position: absolute;
   inset: 0;
-  background-image: url(var(--public-url) "/assets/node-1-539/background.png");
+  background-image: url(var(--public-url)/assets/node-1-539/background.png);
   background-size: cover;
   background-position: center;
   transform: scale(1.001); /* avoid seams on some GPUs */
@@ -21,7 +30,7 @@
   position: absolute;
   inset: 0;
   background-image: url(
-    var(--public-url) "/assets/node-1-539/gradient_horizontal_full.svg"
+    var(--public-url)/assets/node-1-539/gradient_horizontal_full.svg
   );
   background-size: cover;
   background-position: center;
