@@ -1,0 +1,31 @@
+:root {
+  --bg: #000;
+  --text: rgba(255, 255, 255, 0.92);
+  --text-dim: rgba(255, 255, 255, 0.7);
+  --text-faint: rgba(255, 255, 255, 0.55);
+  --chip: rgba(255, 255, 255, 0.14);
+  --chip-border: rgba(255, 255, 255, 0.18);
+  --accent: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+/* Ensure images don't create baseline gaps */
+img {
+  display: block;
+}

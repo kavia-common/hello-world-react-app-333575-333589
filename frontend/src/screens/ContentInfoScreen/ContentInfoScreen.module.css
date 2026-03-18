@@ -1,0 +1,217 @@
+.stage {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
+}
+
+/* Background image (1920x1080) */
+.bg {
+  position: absolute;
+  inset: 0;
+  background-image: url("/assets/node-1-539/background.png");
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.001); /* avoid seams on some GPUs */
+}
+
+/* Gradient overlay svg (1920x1080) */
+.gradient {
+  position: absolute;
+  inset: 0;
+  background-image: url("/assets/node-1-539/gradient_horizontal_full.svg");
+  background-size: cover;
+  background-position: center;
+  pointer-events: none;
+}
+
+/* System info (top-right) */
+.systemInfo {
+  position: absolute;
+  right: 80px;
+  top: 56px;
+  text-align: right;
+  z-index: 5;
+}
+
+.clock {
+  font-size: 44px;
+  line-height: 52px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.date {
+  margin-top: 6px;
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Left panel */
+.panel {
+  position: absolute;
+  left: 96px;
+  top: 108px;
+  width: 1150px;
+  z-index: 6;
+}
+
+.channelRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.channelLogo {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+}
+
+.logoCircle {
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.channelText {
+  display: flex;
+  flex-direction: column;
+}
+
+.channelName {
+  font-size: 22px;
+  line-height: 26px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.channelSub {
+  margin-top: 2px;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.title {
+  margin: 22px 0 0 0;
+  font-size: 72px;
+  line-height: 78px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.metaRow {
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 18px;
+  line-height: 24px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.metaText {
+  font-weight: 500;
+}
+
+.dot {
+  opacity: 0.7;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.92);
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 20px;
+}
+
+.iconGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 8px;
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 16px;
+}
+
+.description {
+  margin: 24px 0 0 0;
+  width: 980px;
+  max-width: 100%;
+  font-size: 20px;
+  line-height: 32px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.actions {
+  margin-top: 34px;
+  display: flex;
+  gap: 16px;
+}
+
+.primaryBtn,
+.secondaryBtn {
+  height: 56px;
+  padding: 0 26px;
+  border-radius: 14px;
+  border: 0;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.primaryBtn {
+  background: rgba(255, 255, 255, 0.92);
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.secondaryBtn {
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* Keep proportions on smaller screens: scale the 1920x1080 design down */
+@media (max-width: 1600px) {
+  .panel {
+    transform-origin: top left;
+    transform: scale(0.9);
+  }
+}
+
+@media (max-width: 1280px) {
+  .panel {
+    transform: scale(0.78);
+  }
+}
