@@ -61,8 +61,12 @@
 .bg {
   position: absolute;
   inset: 0;
+  /* Use 'left top' anchoring so the left side of the image is never cropped.
+   * On narrow viewports 'cover' with a centered position clips the left edge;
+   * anchoring to the left keeps all content visible while still filling the
+   * stage vertically. */
   background-size: cover;
-  background-position: center top;
+  background-position: left top;
   /* Prevent sub-pixel seams on some GPUs */
   transform: scale(1.002);
   will-change: transform;
