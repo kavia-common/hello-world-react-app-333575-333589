@@ -1,0 +1,26 @@
+.page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.heading {
+  margin: 0;
+  font-size: clamp(2.25rem, 3.5vw, 3.25rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+/* Subtle accent underline to match the style guide's primary tone */
+.heading::after {
+  content: "";
+  display: block;
+  height: 4px;
+  width: 72px;
+  margin: 14px auto 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--primary), #06b6d4);
+  opacity: 0.9;
+}
