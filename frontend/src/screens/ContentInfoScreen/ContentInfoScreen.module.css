@@ -1,224 +1,395 @@
+/*
+ * ContentInfoScreen.module.css
+ *
+ * Pixel-faithful styles for Figma node 1:539 (OTT App — Content Info, 1920×1080).
+ *
+ * IMPORTANT — background-image URL strategy:
+ *   All background images that reference public assets are set via **inline styles**
+ *   in the React component, NOT here. css-loader would try to resolve url() paths
+ *   at build time and fail for dynamically-constructed PUBLIC_URL paths.
+ *   The .bgFallback / .gradientFallback classes provide CSS-only fallbacks that
+ *   activate when the image assets are unavailable.
+ */
+
+/* ─── Stage (root frame 1920 × 1080) ─────────────────────────── */
 .stage {
   position: relative;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background: #000;
+  /* Base dark colour — visible only before the background image loads */
+  background: #121212;
+  /* Roboto is referenced in every Figma text style */
+  font-family: Roboto, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif;
+  color: #ffffff;
 }
 
-/*
-  IMPORTANT:
-  - Do NOT use url() in CSS modules with CRA for runtime-constructed paths,
-    because css-loader will try to resolve them at build time and fail.
-  - Background images using PUBLIC_URL are applied via inline styles in the
-    React component instead, so they are resolved at runtime only.
-  - The assets must live under /public/assets/... so they are served statically.
-*/
-
-/* Background image (1920x1080) — background-image is set via inline style in JS */
+/* ─── Background image layer (node 1:540, 1920 × 1080) ────────── */
 .bg {
   position: absolute;
   inset: 0;
   background-size: cover;
   background-position: center;
-  transform: scale(1.001); /* avoid seams on some GPUs */
+  /* Prevent sub-pixel seams on some GPUs */
+  transform: scale(1.002);
+  will-change: transform;
 }
 
-/* Gradient overlay svg (1920x1080) — background-image is set via inline style in JS */
+/*
+ * CSS fallback when background.png is not yet served.
+ * A dark cinematic gradient approximating the Figma screenshot palette
+ * (deep charcoal with a warm amber-brown centre highlight).
+ */
+.bgFallback {
+  background-image: radial-gradient(
+      ellipse 80% 60% at 65% 45%,
+      rgba(80, 55, 30, 0.85) 0%,
+      rgba(40, 28, 15, 0.6) 35%,
+      rgba(18, 18, 18, 0) 70%
+    ),
+    linear-gradient(
+      160deg,
+      #1a1008 0%,
+      #0e0a04 40%,
+      #070507 70%,
+      #080808 100%
+    );
+}
+
+/* ─── Gradient overlay layer (node 1:541, 1920 × 1080) ─────────── */
 .gradient {
   position: absolute;
   inset: 0;
   background-size: cover;
   background-position: center;
   pointer-events: none;
+  z-index: 1;
 }
 
-/* System info (top-right) */
+/*
+ * CSS fallback for the horizontal gradient SVG overlay.
+ * Simulates the left-to-dark gradient that reveals panel content.
+ */
+.gradientFallback {
+  background-image: linear-gradient(
+    90deg,
+    rgba(12, 12, 12, 0.97) 0%,
+    rgba(12, 12, 12, 0.92) 15%,
+    rgba(12, 12, 12, 0.82) 28%,
+    rgba(12, 12, 12, 0.55) 42%,
+    rgba(12, 12, 12, 0.25) 60%,
+    rgba(12, 12, 12, 0) 80%
+  );
+}
+
+/* ─── SystemDate (node 1:543) — x:1724 y:55 ─────────────────── */
 .systemInfo {
   position: absolute;
-  right: 80px;
-  top: 56px;
+  left: 1724px;
+  top: 55px;
+  width: 100px;
+  z-index: 10;
   text-align: right;
-  z-index: 5;
 }
 
+/* style_3VRYLC — fontWeight:400, fontSize:40, Roboto */
 .clock {
-  font-size: 44px;
-  line-height: 52px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  color: rgba(255, 255, 255, 0.92);
+  font-size: 40px;
+  line-height: 1.171875em; /* ~46.9px */
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.95);
+  white-space: nowrap;
 }
 
+/* style_RP9NB3 — fontWeight:400, fontSize:28, textAlign:RIGHT */
 .date {
-  margin-top: 6px;
-  font-size: 22px;
-  line-height: 28px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.7);
+  margin-top: 10px;
+  font-size: 28px;
+  line-height: 1.171875em;
+  font-weight: 400;
+  text-align: right;
+  color: rgba(255, 255, 255, 0.75);
+  white-space: nowrap;
 }
 
-/* Left panel */
+/* ─── MetadataInfoPanel (node 1:542) ─────────────────────────── */
+/* layout_AM8T4J: column, x:96 y:108, width:1150, gap:49px */
 .panel {
   position: absolute;
   left: 96px;
   top: 108px;
   width: 1150px;
+  display: flex;
+  flex-direction: column;
+  gap: 49px;
   z-index: 6;
 }
 
+/* ─── Frame 29360 → Frame 29354: channel row ─────────────────── */
+/* layout_GD3OWG: row, alignItems:center, gap:12px */
 .channelRow {
   display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.channelLogo {
-  width: 56px;
-  height: 56px;
-  display: grid;
-  place-items: center;
-}
-
-.logoCircle {
-  width: 48px;
-  height: 48px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.18);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-}
-
-.channelText {
-  display: flex;
-  flex-direction: column;
-}
-
-.channelName {
-  font-size: 22px;
-  line-height: 26px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-}
-
-.channelSub {
-  margin-top: 2px;
-  font-size: 16px;
-  line-height: 20px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.title {
-  margin: 22px 0 0 0;
-  font-size: 72px;
-  line-height: 78px;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-}
-
-.metaRow {
-  margin-top: 18px;
-  display: flex;
+  flex-direction: row;
   align-items: center;
   gap: 12px;
-  font-size: 18px;
-  line-height: 24px;
-  color: rgba(255, 255, 255, 0.7);
 }
 
+/* style_6XJEEQ: fontWeight:800, fontSize:32, textAlign:RIGHT */
+.channelNumber {
+  font-size: 32px;
+  line-height: 1.171875em;
+  font-weight: 800;
+  text-align: right;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* style_YLBK1Z: fontWeight:800, fontSize:32, textAlign:LEFT */
+.channelName {
+  font-size: 32px;
+  line-height: 1.171875em;
+  font-weight: 800;
+  text-align: left;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* ─── Program Name (node 1:542;456:11826) ─────────────────────── */
+/* style_TPN4LX: fontWeight:400, fontSize:60 */
+.title {
+  margin: 0;
+  font-size: 60px;
+  line-height: 1.171875em; /* ~70.3px */
+  font-weight: 400;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  /* width: 1150px (fill) — inherited from panel */
+}
+
+/* ─── Frame 29355: metadata info row ─────────────────────────── */
+/* layout_06NA5T: row, gap:16px */
+.metaRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  /* No top margin — gap handled by panel column gap */
+}
+
+/* style_NCIG2U: fontWeight:400, fontSize:25 */
 .metaText {
+  font-size: 25px;
+  line-height: 1.171875em;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Vertical divider character — layout_PW9Z0L: 6×29 */
+.divider {
+  font-size: 28px;
+  line-height: 1.171875em;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.4);
+  /* style_MRIGPL: fontWeight:400, fontSize:28 */
+}
+
+/* Tag/AgeRestriction (node I1:542;456:11835) */
+/* layout_QRODOG: row, center, gap:10, padding:4 8, height:32, borderRadius:3px */
+/* fill_33O9NT: rgba(255,255,255,0.15), stroke_JW1WIY: rgba(255,255,255,0.15) 1px */
+.ageChip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  padding: 4px 8px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  /* style_GH7GCJ: fontWeight:400, fontSize:24 */
+  font-size: 24px;
+  line-height: 1.333em;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.95);
+  white-space: nowrap;
+}
+
+/* ─── Frame 29356: action / scheduling row ────────────────────── */
+/* layout_D0F37J: row, alignItems:center, gap:22px */
+.actionRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 22px;
+}
+
+/* Tag/TimeStamp MÁS TARDE (fill_GQMBJG: #3F9321, borderRadius:3px) */
+/* layout_IEK099: row, center, padding:8 18, height:32 */
+/* style_H79ZJH: fontWeight:500, fontSize:22 */
+.laterChip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  padding: 8px 18px;
+  border-radius: 3px;
+  background: #3f9321;
+  font-size: 22px;
+  line-height: 1.454em;
   font-weight: 500;
+  color: #ffffff;
+  white-space: nowrap;
 }
 
-.dot {
-  opacity: 0.7;
+/* Time range "20:00 ‑ 22:20" */
+.timeRange {
+  font-size: 25px;
+  line-height: 1.171875em;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.85);
+  white-space: nowrap;
 }
 
-.spacer {
-  flex: 1 1 auto;
+/* Divider between action row items (layout_GE0IWN: 7×29) */
+.actionDivider {
+  font-size: 28px;
+  line-height: 1.171875em;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.4);
 }
 
-.chip {
+/* Icon buttons — layout_1N9FOF: 32×32 */
+.iconBtn {
   display: inline-flex;
   align-items: center;
-  height: 34px;
-  padding: 0 14px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(255, 255, 255, 0.14);
-  color: rgba(255, 255, 255, 0.92);
-  font-weight: 600;
-  font-size: 15px;
-  line-height: 20px;
-}
-
-.iconGroup {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-left: 8px;
-}
-
-.icon {
+  justify-content: center;
   width: 32px;
   height: 32px;
-  display: grid;
-  place-items: center;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.16);
   color: rgba(255, 255, 255, 0.9);
-  font-size: 16px;
-}
-
-.description {
-  margin: 24px 0 0 0;
-  width: 980px;
-  max-width: 100%;
-  font-size: 20px;
-  line-height: 32px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.65);
-}
-
-.actions {
-  margin-top: 34px;
-  display: flex;
-  gap: 16px;
-}
-
-.primaryBtn,
-.secondaryBtn {
-  height: 56px;
-  padding: 0 26px;
-  border-radius: 14px;
-  border: 0;
-  font-size: 18px;
-  font-weight: 700;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
+/* ─── TextBox3Lines description ───────────────────────────────── */
+/* layout_WJBFI6: 925×117, style_V2YONI: fontWeight:400, fontSize:26, lineHeight:1.5em */
+.description {
+  margin: 0;
+  width: 925px;
+  max-width: 100%;
+  font-size: 26px;
+  line-height: 1.5em; /* 39px */
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* ─── PanelButtons group ──────────────────────────────────────── */
+/* layout_043M0O: 862×156, contains multiple 142×156 button panels */
+.actions {
+  display: flex;
+  flex-direction: row;
+  gap: 0; /* buttons are positioned side-by-side within the 862px container */
+  width: 862px;
+  height: 156px;
+  align-items: flex-end;
+  flex-wrap: nowrap;
+}
+
+/*
+ * Primary button (PanelButtons On / Programar)
+ * layout_54HP9O: 142×156, fill: #F4F4F4 (fill_59TQVU)
+ * style_XQLC4U: fontWeight:500, fontSize:22, textAlign:CENTER
+ */
 .primaryBtn {
-  background: rgba(255, 255, 255, 0.92);
-  color: rgba(0, 0, 0, 0.9);
+  width: 142px;
+  height: 80px; /* matches the inner FHD/Buttons height */
+  padding: 0 8px;
+  border-radius: 100px;
+  border: none;
+  background: #f4f4f4;
+  color: rgba(0, 0, 0, 0.88);
+  font-family: inherit;
+  font-size: 22px;
+  line-height: 1.09em;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: opacity 0.15s ease;
 }
 
+.primaryBtn:hover {
+  opacity: 0.9;
+}
+
+.primaryBtn:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+/*
+ * Secondary buttons (PanelButtons Off states)
+ * fill_KOE4AA: rgba(244,244,244,0.15), borderRadius:100px
+ */
 .secondaryBtn {
-  background: rgba(255, 255, 255, 0.16);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: rgba(255, 255, 255, 0.92);
+  width: 80px;
+  height: 80px;
+  padding: 0;
+  border-radius: 100px;
+  border: none;
+  background: rgba(244, 244, 244, 0.15);
+  color: rgba(255, 255, 255, 0.9);
+  font-family: inherit;
+  font-size: 22px;
+  font-weight: 500;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 2px;
+  transition: background 0.15s ease;
 }
 
-/* Keep proportions on smaller screens: scale the 1920x1080 design down */
-@media (max-width: 1600px) {
+.secondaryBtn:hover {
+  background: rgba(244, 244, 244, 0.25);
+}
+
+.secondaryBtn:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+.secondaryBtnIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─── Responsive scaling ──────────────────────────────────────── */
+/*
+ * The design is fixed at 1920×1080. On narrower viewports we scale down
+ * the entire stage using a CSS custom property so the proportions remain exact.
+ *
+ * We do NOT scale .bg / .gradient since they are already full-viewport fills.
+ */
+@media (max-width: 1920px) {
+  .stage {
+    /* Scale factor = viewport-width / 1920 */
+    --scale: calc(100vw / 1920);
+  }
+
+  .systemInfo {
+    transform-origin: top right;
+    transform: scale(var(--scale, 1));
+    /* Keep absolute position via % of viewport */
+    left: auto;
+    right: 0;
+    top: calc(55px * var(--scale, 1));
+  }
+
   .panel {
     transform-origin: top left;
-    transform: scale(0.9);
-  }
-}
-
-@media (max-width: 1280px) {
-  .panel {
-    transform: scale(0.78);
+    transform: scale(var(--scale, 1));
+    left: 0;
+    top: calc(108px * var(--scale, 1));
+    /* Compensate for scale: panel width stays at 1150px in design-space */
   }
 }

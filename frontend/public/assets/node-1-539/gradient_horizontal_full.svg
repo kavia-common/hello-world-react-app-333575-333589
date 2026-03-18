@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" fill="none">
+  <defs>
+    <linearGradient id="gradLeft" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#0c0c0c" stop-opacity="0.97"/>
+      <stop offset="15%"  stop-color="#0c0c0c" stop-opacity="0.92"/>
+      <stop offset="28%"  stop-color="#0c0c0c" stop-opacity="0.82"/>
+      <stop offset="42%"  stop-color="#0c0c0c" stop-opacity="0.55"/>
+      <stop offset="60%"  stop-color="#0c0c0c" stop-opacity="0.25"/>
+      <stop offset="80%"  stop-color="#0c0c0c" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#0c0c0c" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#gradLeft)"/>
+</svg>
