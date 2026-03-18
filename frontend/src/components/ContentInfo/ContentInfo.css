@@ -27,6 +27,31 @@
   z-index: 0;
 }
 
+/* Fallback cinematic gradient used when no poster image is available   */
+/* (e.g. Figma asset not downloadable). Matches #121212 base palette.  */
+.ci-bg--fallback {
+  background: linear-gradient(
+    135deg,
+    #121212 0%,
+    #1a1a2e 35%,
+    #16213e 65%,
+    #0f3460 100%
+  );
+}
+
+/* Fallback cinematic gradient when no poster image is available.    */
+/* Mimics a dark movie-poster tone matching the Figma colour palette */
+/* (#121212 base, blue-purple accent on the right side).             */
+.ci-bg--fallback {
+  background: linear-gradient(
+    135deg,
+    #121212 0%,
+    #1a1a2e 35%,
+    #16213e 65%,
+    #0f3460 100%
+  );
+}
+
 /* ── Horizontal gradient overlay ─────────────────────────────── */
 /* Darkens the left side (where text sits) while the right side  */
 /* reveals the poster image — matches GradientHorizontalFull.    */

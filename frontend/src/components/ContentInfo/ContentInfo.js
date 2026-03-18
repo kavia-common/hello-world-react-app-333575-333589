@@ -1,30 +1,66 @@
 import React from "react";
 import "./ContentInfo.css";
-import bgImage from "../../assets/figma/content-info-bg.png";
-import replayForma from "../../assets/figma/icon-replay-forma.svg";
-import replayVector from "../../assets/figma/icon-replay-vector.svg";
 
 /**
- * ReplayIcon — composite SVG icon assembled from two Figma SVG assets
- * (Forma + Vector layers) matching the Replay icon component in Figma.
+ * ReplayIcon — circular replay/rewind icon rendered as inline SVG.
+ *
+ * Figma source: "Replay" icon component (Forma + Vector layers).
+ * Rendered as inline SVG — consistent with RecordIcon, AudioSubtitlesIcon,
+ * and ScheduleIcon in this file — to remove any dependency on external asset
+ * files that are not available from the Figma API.
+ *
+ * Contract:
+ *   Inputs:  size (number px, default 32), dark (bool — dark stroke for light bg)
+ *   Outputs: <svg> element, aria-hidden="true"
+ *   Errors:  none (pure render, no I/O)
+ *   Side effects: none
  */
 // PUBLIC_INTERFACE
 function ReplayIcon({ size = 32, dark = false }) {
-  /** Replay icon from Figma assets. `dark` flips colours for light backgrounds. */
+  /** Replay icon (inline SVG). `dark` renders it in dark colour for light backgrounds. */
+  const stroke = dark ? "#282828" : "#ffffff";
+  const fill = dark ? "#282828" : "#ffffff";
   return (
-    <span
-      className={`ci-icon ci-icon--replay${dark ? " ci-icon--dark" : ""}`}
-      style={{ width: size, height: size }}
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 32 32"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
+      className="ci-icon ci-icon--replay"
     >
-      <img src={replayForma} alt="" className="ci-icon__forma" />
-      <img src={replayVector} alt="" className="ci-icon__vector" />
-    </span>
+      {/* Circular arrow (Forma layer) — counter-clockwise arc */}
+      <path
+        d="M16 6 A10 10 0 1 0 26 16"
+        stroke={stroke}
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        fill="none"
+      />
+      {/* Arrowhead at open end of arc (Vector layer) */}
+      <polyline
+        points="22,10 26,16 20,16"
+        stroke={stroke}
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
+      {/* Centre play-from-start indicator */}
+      <circle cx="16" cy="16" r="2" fill={fill} />
+    </svg>
   );
 }
 
 /**
  * RecordIcon — circular record button icon rendered as inline SVG.
+ *
+ * Contract:
+ *   Inputs:  size (number px, default 32), dark (bool)
+ *   Outputs: <svg> element, aria-hidden="true"
+ *   Errors:  none
+ *   Side effects: none
  */
 // PUBLIC_INTERFACE
 function RecordIcon({ size = 32, dark = false }) {
@@ -42,7 +78,7 @@ function RecordIcon({ size = 32, dark = false }) {
     >
       {/* Outer circle outline */}
       <circle cx="16" cy="16" r="11" stroke={fill} strokeWidth="2.5" fill="none" />
-      {/* Inner filled circle */}
+      {/* Inner filled record dot */}
       <circle cx="16" cy="16" r="6" fill="#FF4444" />
     </svg>
   );
@@ -50,6 +86,12 @@ function RecordIcon({ size = 32, dark = false }) {
 
 /**
  * AudioSubtitlesIcon — audio and subtitles icon rendered as inline SVG.
+ *
+ * Contract:
+ *   Inputs:  size (number px, default 32), dark (bool)
+ *   Outputs: <svg> element, aria-hidden="true"
+ *   Errors:  none
+ *   Side effects: none
  */
 // PUBLIC_INTERFACE
 function AudioSubtitlesIcon({ size = 32, dark = false }) {
@@ -80,6 +122,12 @@ function AudioSubtitlesIcon({ size = 32, dark = false }) {
 
 /**
  * ScheduleIcon — calendar/schedule icon for the "Programar" button.
+ *
+ * Contract:
+ *   Inputs:  size (number px, default 40), dark (bool)
+ *   Outputs: <svg> element, aria-hidden="true"
+ *   Errors:  none
+ *   Side effects: none
  */
 // PUBLIC_INTERFACE
 function ScheduleIcon({ size = 40, dark = false }) {
@@ -108,25 +156,43 @@ function ScheduleIcon({ size = 40, dark = false }) {
  *
  * Implements Figma node 0:539 "Content Info" (1920 × 1080).
  * Displays:
- *  - Background movie poster image with left-side gradient overlay
+ *  - Background: poster image when bgImageUrl is provided; CSS cinematic
+ *    gradient fallback (ci-bg--fallback) otherwise.
  *  - System date/time in top-right corner
  *  - Channel + programme metadata panel (top-left)
  *  - Movie description paragraph
  *  - Action buttons row (Programar, Replay, Record × 3, Audio & Subtitles)
+ *
+ * Contract:
+ *   Inputs:  bgImageUrl (string, optional) — URL of the background poster.
+ *            Defaults to REACT_APP_BG_IMAGE_URL env var, or "" (CSS fallback).
+ *   Outputs: full-screen <div> with nested layout elements
+ *   Errors:  none (pure render; no external I/O)
+ *   Side effects: none
+ *
+ * Background image note:
+ *   The Figma poster PNG (content-info-bg.png) could not be retrieved from the
+ *   Figma API (file returns 404). When a real poster URL is available, supply it
+ *   via REACT_APP_BG_IMAGE_URL in .env or via the bgImageUrl prop. The CSS
+ *   ci-bg--fallback class provides a cinematic dark gradient in the meantime.
  */
 // PUBLIC_INTERFACE
-function ContentInfo() {
+function ContentInfo({ bgImageUrl = process.env.REACT_APP_BG_IMAGE_URL || "" }) {
   /**
    * Content Info screen — Figma node 0:539.
    * Full-screen OTT detail view for movie/programme information.
+   *
+   * @param {string} [bgImageUrl] - Optional URL of the background poster image.
    */
+  const bgStyle = bgImageUrl ? { backgroundImage: `url(${bgImageUrl})` } : {};
+
   return (
     <div className="ci-root" role="main" aria-label="Content Info">
 
-      {/* ── Layer 0: Background image (full frame) ── */}
+      {/* ── Layer 0: Background image / fallback gradient ── */}
       <div
-        className="ci-bg"
-        style={{ backgroundImage: `url(${bgImage})` }}
+        className={`ci-bg${bgImageUrl ? "" : " ci-bg--fallback"}`}
+        style={bgStyle}
         role="img"
         aria-label="Gladiador II movie background"
       />
@@ -232,7 +298,7 @@ function ContentInfo() {
               <span className="ci-btn__label">Programar</span>
             </button>
 
-            {/* Button 2 — Replay (focused state: semi-transparent circle, focused) */}
+            {/* Button 2 — Replay (focused state: semi-transparent circle) */}
             <button className="ci-btn ci-btn--focused" aria-pressed="false" aria-label="Ver desde el principio">
               <span className="ci-btn__icon">
                 <ReplayIcon size={40} />
