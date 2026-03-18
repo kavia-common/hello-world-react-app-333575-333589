@@ -1,14 +1,10 @@
 import React from "react";
+import OTTPage from "./components/OTTPage";
 
 /**
- * Single-page application root.
+ * App root — renders the OTT Streaming Platform UI
+ * Based on Figma: XUXo80WmsomKgEyA6MWE8m / node-id: 0-539
  */
 export default function App() {
-  return (
-    <main className="app" aria-label="Hello World page">
-      <section className="surface" aria-label="Centered content">
-        <h1 className="title">Hello World</h1>
-      </section>
-    </main>
-  );
+  return <OTTPage />;
 }
