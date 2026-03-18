@@ -1,8 +1,8 @@
-/* Global light theme baseline */
+/* Global baseline — full-viewport OTT layout */
 :root {
-  --bg: #f9fafb;
-  --surface: #ffffff;
-  --text: #111827;
+  --bg: #121212;
+  --surface: #1e1e1e;
+  --text: #ffffff;
   --primary: #3b82f6;
 }
 
@@ -13,16 +13,21 @@
 }
 
 html,
-body {
+body,
+#root {
   height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
 body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica,
-    Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  font-family: "Roboto", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

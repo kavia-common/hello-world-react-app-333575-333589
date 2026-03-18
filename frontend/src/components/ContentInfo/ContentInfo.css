@@ -1,0 +1,450 @@
+/* ============================================================
+   ContentInfo.css  —  Figma node 0:539 "Content Info"
+   Design base: 1920 × 1080. All sizing uses clamp() to scale
+   proportionally on smaller viewports while capping at the
+   Figma pixel values on 1920 px+ screens.
+   ============================================================ */
+
+/* ── Root container ─────────────────────────────────────────── */
+.ci-root {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  min-width: 1024px;
+  overflow: hidden;
+  background-color: #121212;
+  font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
+  color: #ffffff;
+}
+
+/* ── Background image layer ──────────────────────────────────── */
+.ci-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center right;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+
+/* ── Horizontal gradient overlay ─────────────────────────────── */
+/* Darkens the left side (where text sits) while the right side  */
+/* reveals the poster image — matches GradientHorizontalFull.    */
+.ci-gradient-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(18, 18, 18, 1)    0%,
+    rgba(18, 18, 18, 0.97) 28%,
+    rgba(18, 18, 18, 0.88) 48%,
+    rgba(18, 18, 18, 0.40) 68%,
+    rgba(18, 18, 18, 0)   100%
+  );
+  z-index: 1;
+}
+
+/* ── System date — top-right (Figma: x:1724, y:55, w:100, h:90) ── */
+.ci-system-date {
+  position: absolute;
+  /* right offset = 1920 - 1724 - 100 = 96px → ~5% of 1920 */
+  top: clamp(30px, 2.865vw, 55px);
+  right: clamp(50px, 5vw, 96px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  z-index: 10;
+}
+
+.ci-system-date__time {
+  display: block;
+  font-size: clamp(22px, 2.083vw, 40px);
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 1.172;
+  white-space: nowrap;
+}
+
+.ci-system-date__date {
+  display: block;
+  font-size: clamp(16px, 1.458vw, 28px);
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 1.172;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* ── Main metadata panel (x:96, y:108, w:1150) ──────────────── */
+.ci-panel {
+  position: absolute;
+  top: clamp(54px, 5.625vw, 108px);
+  left: clamp(40px, 5vw, 96px);
+  width: min(1150px, 60vw);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(24px, 2.552vw, 49px);
+  z-index: 10;
+}
+
+/* ── Panel top: channel · title · meta block ─────────────────── */
+.ci-panel__top {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 1.406vw, 27px);
+}
+
+/* ── Channel row ─────────────────────────────────────────────── */
+.ci-channel-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: clamp(6px, 0.625vw, 12px);
+}
+
+.ci-channel-number {
+  font-size: clamp(18px, 1.667vw, 32px);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.172;
+  text-align: right;
+}
+
+.ci-channel-name {
+  font-size: clamp(18px, 1.667vw, 32px);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.172;
+  text-align: left;
+}
+
+/* ── Programme title ─────────────────────────────────────────── */
+.ci-program-name-row {
+  display: flex;
+  align-items: center;
+}
+
+.ci-program-name {
+  margin: 0;
+  font-size: clamp(30px, 3.125vw, 60px);
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 1.172;
+  text-align: left;
+}
+
+/* ── Metadata block ──────────────────────────────────────────── */
+.ci-meta-block {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 0.729vw, 14px);
+}
+
+/* ── Tags row: original title | duration | genre | age ──────── */
+.ci-meta-tags-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: clamp(6px, 0.833vw, 16px);
+}
+
+.ci-meta-text {
+  font-size: clamp(13px, 1.302vw, 25px);
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 1.172;
+  white-space: nowrap;
+}
+
+.ci-meta-divider {
+  font-size: clamp(13px, 1.302vw, 25px);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.172;
+  user-select: none;
+}
+
+/* Age restriction tag — rgba(255,255,255,0.15) bg + 1px border */
+.ci-tag.ci-tag--age {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  font-size: clamp(12px, 1.25vw, 24px);
+  font-weight: 400;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+  line-height: 1.333;
+  white-space: nowrap;
+}
+
+/* ── Time / schedule row ─────────────────────────────────────── */
+.ci-time-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: clamp(10px, 1.146vw, 22px);
+}
+
+/* "MÁS TARDE" green badge */
+.ci-tag.ci-tag--later {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 18px;
+  font-size: clamp(11px, 1.146vw, 22px);
+  font-weight: 500;
+  color: #ffffff;
+  background: #3f9321;
+  border-radius: 3px;
+  line-height: 1.455;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Time range group */
+.ci-time-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2px;
+}
+
+.ci-time {
+  font-size: clamp(13px, 1.302vw, 25px);
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 1.172;
+  white-space: nowrap;
+}
+
+.ci-time-bar {
+  font-size: clamp(13px, 1.302vw, 25px);
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 1.172;
+}
+
+/* Vertical pipe divider (Divider32 — h:29 in Figma) */
+.ci-divider32 {
+  font-size: clamp(16px, 1.458vw, 28px);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.172;
+  user-select: none;
+}
+
+/* ── Inline icon buttons (replay / record in time row) ───────── */
+.ci-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #ffffff;
+  transition: opacity 0.15s ease;
+}
+
+.ci-icon-btn:hover {
+  opacity: 0.75;
+}
+
+.ci-icon-btn:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── Replay icon composite ───────────────────────────────────── */
+/* Two SVG layers (Forma + Vector) positioned on top of each other */
+.ci-icon {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+}
+
+.ci-icon__forma,
+.ci-icon__vector {
+  display: block;
+}
+
+.ci-icon__forma {
+  /* Forma fills the icon bounding box */
+  width: 100%;
+  height: 100%;
+}
+
+.ci-icon__vector {
+  /* Vector sits at the bottom-right of the Forma in Figma:        */
+  /* icon 32×32 → vector 6.67×8.67 → centred ~bottom-right area   */
+  position: absolute;
+  width: 29%;
+  height: 34%;
+  right: 5%;
+  bottom: 3%;
+}
+
+/* Dark-mode icon (for white circle button background) */
+.ci-icon--dark .ci-icon__forma,
+.ci-icon--dark .ci-icon__vector {
+  filter: invert(1);
+}
+
+/* ── Panel bottom: description + buttons ─────────────────────── */
+.ci-panel__bottom {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(28px, 3.229vw, 62px);
+}
+
+/* ── Movie description (w:925, h:117, font-size:26) ─────────── */
+.ci-description {
+  margin: 0;
+  width: min(925px, 48vw);
+  font-size: clamp(14px, 1.354vw, 26px);
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 1.5;
+  text-align: left;
+  /* Limit to ~4 visible lines matching the Figma height */
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Action buttons row (group 862×156) ─────────────────────── */
+.ci-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 0;
+}
+
+/* Individual button — 142×156 in Figma */
+.ci-btn {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: clamp(72px, 7.396vw, 142px);
+  height: clamp(80px, 8.125vw, 156px);
+  padding: 4px;
+  gap: clamp(6px, 0.417vw, 8px);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+  color: #ffffff;
+}
+
+.ci-btn:hover {
+  opacity: 0.85;
+}
+
+.ci-btn:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.7);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Icon container (circle) — 104×80 in Figma */
+.ci-btn__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(52px, 5.417vw, 104px);
+  height: clamp(40px, 4.167vw, 80px);
+  border-radius: 100px;
+  transition: background 0.15s ease;
+}
+
+/* Active/ON state — solid white circle (fill_Z0E7J0 = #F4F4F4) */
+.ci-btn--active .ci-btn__icon {
+  background: #f4f4f4;
+}
+
+/* Focused state — semi-transparent circle with faint ring */
+.ci-btn--focused .ci-btn__icon {
+  background: rgba(244, 244, 244, 0.15);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.45);
+}
+
+/* Inactive/OFF state — dimmed semi-transparent circle */
+.ci-btn--inactive .ci-btn__icon {
+  background: rgba(244, 244, 244, 0.15);
+  opacity: 0.6;
+}
+
+/* Button label (Figma: Roboto 500, 22px, centred below icon) */
+.ci-btn__label {
+  font-size: clamp(11px, 1.146vw, 22px);
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 1.091;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Active button: icons should appear dark on the white circle */
+.ci-btn--active .ci-btn__icon svg path {
+  stroke: #282828;
+}
+.ci-btn--active .ci-btn__icon svg rect,
+.ci-btn--active .ci-btn__icon svg line {
+  stroke: #282828;
+  fill: #282828;
+}
+/* Preserve the red record dot */
+.ci-btn--active .ci-btn__icon svg circle:last-child {
+  fill: #FF4444;
+  stroke: none;
+}
+.ci-btn--active .ci-btn__icon svg circle:first-child {
+  stroke: #282828;
+  fill: none;
+}
+
+/* Inactive / focused: icons should render white */
+.ci-btn--inactive .ci-btn__icon img,
+.ci-btn--focused  .ci-btn__icon img {
+  filter: brightness(10) saturate(0);
+}
+
+/* ============================================================
+   Viewport ≥ 1920px: use exact Figma pixel values
+   ============================================================ */
+@media (min-width: 1920px) {
+  .ci-panel     { top: 108px; left: 96px; width: 1150px; }
+  .ci-system-date { top: 55px; right: 96px; }
+
+  .ci-system-date__time { font-size: 40px; }
+  .ci-system-date__date { font-size: 28px; }
+
+  .ci-program-name      { font-size: 60px; }
+  .ci-channel-number,
+  .ci-channel-name      { font-size: 32px; }
+
+  .ci-meta-text,
+  .ci-time,
+  .ci-time-bar          { font-size: 25px; }
+  .ci-meta-divider      { font-size: 25px; }
+  .ci-divider32         { font-size: 28px; }
+
+  .ci-tag--age          { font-size: 24px; }
+  .ci-tag--later        { font-size: 22px; }
+
+  .ci-description       { font-size: 26px; width: 925px; }
+  .ci-btn__label        { font-size: 22px; }
+
+  .ci-btn               { width: 142px; height: 156px; }
+  .ci-btn__icon         { width: 104px; height: 80px;  }
+}

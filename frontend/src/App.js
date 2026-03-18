@@ -1,14 +1,13 @@
 import React from "react";
-import "./App.css";
+import ContentInfo from "./components/ContentInfo/ContentInfo";
 
 // PUBLIC_INTERFACE
 function App() {
-  /** Root single-page app that renders a centered “Hello World” heading. */
-  return (
-    <main className="page" role="main" aria-label="Hello World page">
-      <h1 className="heading">Hello World</h1>
-    </main>
-  );
+  /**
+   * Root single-page application.
+   * Renders the Content Info detail screen (Figma node 0:539).
+   */
+  return <ContentInfo />;
 }
 
 export default App;
