@@ -1,3 +1,4 @@
+/* Global resets – colour theming is handled by App.css via CSS variables */
 :root {
   color-scheme: light;
 }
@@ -9,11 +10,8 @@ body {
 
 body {
   margin: 0;
-  background: #f9fafb;
-  color: #111827;
-
-  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial,
-    "Apple Color Emoji", "Segoe UI Emoji";
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial,
+    'Apple Color Emoji', 'Segoe UI Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
