@@ -1,34 +1,29 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders THE BLOG heading', () => {
+test('renders StreamVibe logo', () => {
   render(<App />);
-  // The hero banner contains an h1 with "THE BLOG"
-  const heading = screen.getByRole('heading', { name: /the blog/i, level: 1 });
-  expect(heading).toBeInTheDocument();
-});
-
-test('renders Recent blog posts section', () => {
-  render(<App />);
-  const recentHeading = screen.getByRole('heading', { name: /recent blog posts/i });
-  expect(recentHeading).toBeInTheDocument();
-});
-
-test('renders All blog posts section', () => {
-  render(<App />);
-  const allHeading = screen.getByRole('heading', { name: /all blog posts/i });
-  expect(allHeading).toBeInTheDocument();
+  const logo = screen.getByAltText('StreamVibe');
+  expect(logo).toBeInTheDocument();
 });
 
 test('renders navigation links', () => {
   render(<App />);
-  expect(screen.getByRole('link', { name: /blog/i })).toBeInTheDocument();
-  expect(screen.getByRole('link', { name: /projects/i })).toBeInTheDocument();
-  expect(screen.getByRole('link', { name: /about/i })).toBeInTheDocument();
-  expect(screen.getByRole('link', { name: /newsletter/i })).toBeInTheDocument();
+  expect(screen.getByText('Home')).toBeInTheDocument();
+  expect(screen.getByText('Movies & Shows')).toBeInTheDocument();
 });
 
-test('renders footer with copyright', () => {
+test('renders Stranger Things title', () => {
   render(<App />);
-  expect(screen.getByText(/© 2023/i)).toBeInTheDocument();
+  expect(screen.getByRole('heading', { name: /stranger things/i })).toBeInTheDocument();
+});
+
+test('renders Seasons and Episodes section', () => {
+  render(<App />);
+  expect(screen.getByRole('heading', { name: /seasons and episodes/i })).toBeInTheDocument();
+});
+
+test('renders footer', () => {
+  render(<App />);
+  expect(screen.getByText(/@2023 streamvib/i)).toBeInTheDocument();
 });

@@ -18,7 +18,7 @@ function Footer() {
       <div className="site-footer__inner">
         <p className="site-footer__copy">© 2023</p>
         <nav className="site-footer__nav" aria-label="Social links">
-          <ul className="site-footer__links" role="list">
+          <ul className="site-footer__links">
             {socialLinks.map(({ label, href }) => (
               <li key={label}>
                 <a href={href} className="site-footer__link">

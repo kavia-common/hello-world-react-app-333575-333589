@@ -1,0 +1,1289 @@
+/* ======================================================================
+   StreamVibe – Shows Page Open (Figma node 2005:2032)
+   Design tokens and component styles
+   ====================================================================== */
+
+/* ── Design Tokens ───────────────────────────────────────────────────── */
+:root {
+  /* Core colours (from Figma) */
+  --sv-black-08: #141414;
+  --sv-black-06: #0f0f0f;
+  --sv-black-10: #1a1a1a;
+  --sv-black-12: #1f1f1f;
+  --sv-black-15: #262626;
+  --sv-black-20: #333333;
+  --sv-grey-60: #999999;
+  --sv-grey-75: #bfbfbf;
+  --sv-white: #ffffff;
+  --sv-red: #e50000;
+
+  /* Typography */
+  --sv-font: 'Manrope', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto,
+    Helvetica, Arial, sans-serif;
+
+  /* Spacing */
+  --sv-sp-4: 4px;
+  --sv-sp-6: 6px;
+  --sv-sp-8: 8px;
+  --sv-sp-10: 10px;
+  --sv-sp-12: 12px;
+  --sv-sp-14: 14px;
+  --sv-sp-16: 16px;
+  --sv-sp-18: 18px;
+  --sv-sp-20: 20px;
+  --sv-sp-24: 24px;
+  --sv-sp-30: 30px;
+  --sv-sp-32: 32px;
+  --sv-sp-40: 40px;
+  --sv-sp-48: 48px;
+  --sv-sp-60: 60px;
+  --sv-sp-80: 80px;
+
+  /* Radii */
+  --sv-radius-sm: 6px;
+  --sv-radius-md: 8px;
+  --sv-radius-lg: 10px;
+  --sv-radius-xl: 12px;
+  --sv-radius-pill: 100px;
+
+  /* Widths */
+  --sv-max-width: 1280px;
+  --sv-page-px: 80px;
+}
+
+/* ── Reset ───────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* ── Skip link (a11y) ────────────────────────────────────────────────── */
+.sv-skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--sv-sp-16);
+  z-index: 9999;
+  padding: var(--sv-sp-8) var(--sv-sp-16);
+  background: var(--sv-red);
+  color: var(--sv-white);
+  font-weight: 600;
+  font-size: 0.875rem;
+  border-radius: var(--sv-radius-md);
+  text-decoration: none;
+  transition: top 0.2s;
+}
+.sv-skip-link:focus {
+  top: var(--sv-sp-8);
+}
+
+/* ── App wrapper ─────────────────────────────────────────────────────── */
+.sv-app {
+  min-height: 100vh;
+  background: var(--sv-black-06);
+  color: var(--sv-white);
+  font-family: var(--sv-font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+.sv-main {
+  outline: none;
+}
+
+/* ── Shared card ─────────────────────────────────────────────────────── */
+.sv-card {
+  background: var(--sv-black-10);
+  border: 1px solid var(--sv-black-15);
+  border-radius: var(--sv-radius-lg);
+}
+
+/* ── Section label ────────────────────────────────────────────────────── */
+.sv-section-label {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--sv-grey-60);
+}
+
+/* ── Shared button styles ─────────────────────────────────────────────── */
+.sv-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sv-sp-4);
+  padding: 14px 20px;
+  border: none;
+  border-radius: var(--sv-radius-md);
+  font-family: var(--sv-font);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.53;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.sv-btn:hover {
+  opacity: 0.88;
+}
+.sv-btn:active {
+  transform: scale(0.97);
+}
+.sv-btn:focus-visible {
+  outline: 2px solid var(--sv-white);
+  outline-offset: 2px;
+}
+
+.sv-btn--red {
+  background: var(--sv-red);
+  color: var(--sv-white);
+}
+
+.sv-btn--ghost {
+  background: var(--sv-black-08);
+  border: 1px solid var(--sv-black-15);
+  color: var(--sv-white);
+}
+
+.sv-btn--small {
+  padding: var(--sv-sp-12);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.sv-btn--play {
+  gap: var(--sv-sp-4);
+}
+
+.sv-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: var(--sv-black-08);
+  border: 1px solid var(--sv-black-15);
+  border-radius: 50%;
+  color: var(--sv-grey-60);
+  font-size: 20px;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+}
+.sv-icon-btn:hover:not(:disabled) {
+  color: var(--sv-white);
+  background: var(--sv-black-15);
+}
+.sv-icon-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.sv-icon-btn:focus-visible {
+  outline: 2px solid var(--sv-white);
+  outline-offset: 2px;
+}
+
+/* ── Tag pill ─────────────────────────────────────────────────────────── */
+.sv-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--sv-sp-6) var(--sv-sp-12);
+  background: var(--sv-black-08);
+  border: 1px solid var(--sv-black-15);
+  border-radius: var(--sv-radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--sv-white);
+  white-space: nowrap;
+}
+
+/* ======================================================================
+   NAVBAR
+   ====================================================================== */
+.sv-navbar {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(15, 15, 15, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--sv-black-15);
+}
+
+.sv-navbar__inner {
+  max-width: var(--sv-max-width);
+  margin: 0 auto;
+  padding: 24px var(--sv-page-px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sv-sp-20);
+}
+
+.sv-navbar__logo {
+  display: block;
+  flex-shrink: 0;
+  text-decoration: none;
+  line-height: 0;
+}
+
+.sv-navbar__logo img {
+  display: block;
+  height: 50px;
+  width: auto;
+}
+
+/* Nav pill – centre */
+.sv-navbar__pill {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: var(--sv-sp-16);
+  padding: 8px 30px;
+  background: var(--sv-black-06);
+  border: 3px solid var(--sv-black-12);
+  border-radius: var(--sv-radius-lg);
+}
+
+.sv-navbar__pill-link {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--sv-grey-75);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.15s;
+}
+.sv-navbar__pill-link:hover {
+  color: var(--sv-white);
+}
+.sv-navbar__pill-link--active {
+  padding: 12px 16px;
+  background: var(--sv-black-10);
+  border: 1px solid var(--sv-black-10);
+  border-radius: var(--sv-radius-md);
+  color: var(--sv-white);
+  font-weight: 500;
+}
+.sv-navbar__pill-link:focus-visible {
+  outline: 2px solid var(--sv-white);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Right actions */
+.sv-navbar__actions {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.sv-navbar__actions img {
+  display: block;
+}
+
+/* Mobile hamburger (hidden on desktop) */
+.sv-navbar__hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--sv-sp-8);
+  border-radius: 4px;
+}
+.sv-navbar__hamburger:focus-visible {
+  outline: 2px solid var(--sv-white);
+  outline-offset: 2px;
+}
+.sv-hamburger-bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--sv-white);
+  border-radius: 2px;
+}
+
+.sv-navbar__mobile-menu {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sv-sp-4);
+  padding: var(--sv-sp-16) var(--sv-sp-24);
+  background: var(--sv-black-08);
+  border-top: 1px solid var(--sv-black-15);
+}
+.sv-navbar__mobile-link {
+  display: block;
+  padding: var(--sv-sp-12) var(--sv-sp-16);
+  color: var(--sv-grey-75);
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: var(--sv-radius-md);
+  transition: color 0.15s, background 0.15s;
+}
+.sv-navbar__mobile-link:hover {
+  color: var(--sv-white);
+  background: var(--sv-black-10);
+}
+
+/* ======================================================================
+   HERO
+   ====================================================================== */
+.sv-hero {
+  position: relative;
+  width: 100%;
+  min-height: 709px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: flex-end;
+}
+
+.sv-hero__content {
+  max-width: var(--sv-max-width);
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--sv-sp-40) var(--sv-page-px) var(--sv-sp-16);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sv-sp-24);
+  text-align: center;
+}
+
+.sv-hero__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 100px;
+  width: 100%;
+}
+
+.sv-hero__title {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--sv-white);
+  text-align: center;
+}
+
+.sv-hero__desc {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--sv-grey-60);
+  text-align: center;
+}
+
+.sv-hero__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sv-sp-20);
+}
+
+.sv-hero__actions img {
+  display: block;
+}
+
+/* ======================================================================
+   CONTENT GRID (main two-column layout)
+   ====================================================================== */
+.sv-content-grid {
+  max-width: var(--sv-max-width);
+  margin: 0 auto;
+  padding: var(--sv-sp-20) var(--sv-page-px);
+  display: grid;
+  grid-template-columns: 1fr 416px;
+  gap: var(--sv-sp-20);
+  align-items: start;
+}
+
+.sv-content-left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sv-sp-20);
+}
+
+/* ======================================================================
+   SEASONS & EPISODES
+   ====================================================================== */
+.sv-seasons__card {
+  padding: var(--sv-sp-30);
+}
+
+.sv-seasons__heading {
+  margin: 0 0 var(--sv-sp-30) 0;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--sv-white);
+}
+
+.sv-seasons__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sv-sp-16);
+}
+
+/* Season header row */
+.sv-seasons__season-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: var(--sv-sp-20) var(--sv-sp-40);
+  background: var(--sv-black-06);
+  border: 1px solid var(--sv-black-15);
+  border-radius: var(--sv-radius-lg);
+  cursor: pointer;
+  font-family: var(--sv-font);
+  transition: border-color 0.15s;
+  text-align: left;
+}
+.sv-seasons__season-header:hover {
+  border-color: var(--sv-grey-60);
+}
+.sv-seasons__season-header:focus-visible {
+  outline: 2px solid var(--sv-white);
+  outline-offset: 2px;
+}
+.sv-seasons__season-header--active {
+  background: var(--sv-black-06);
+}
+
+.sv-seasons__season-info {
+  display: flex;
+  align-items: center;
+  gap: var(--sv-sp-8);
+}
+
+.sv-seasons__season-name {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--sv-white);
+}
+
+.sv-seasons__season-count {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--sv-grey-60);
+}
+
+.sv-seasons__season-header img {
+  display: block;
+  flex-shrink: 0;
+}
+
+/* Episode list */
+.sv-episodes {
+  padding: var(--sv-sp-40);
+}
+
+.sv-episode {
+  display: flex;
+  align-items: center;
+  gap: var(--sv-sp-18);
+  padding: var(--sv-sp-30) 0 var(--sv-sp-40);
+}
+.sv-episode--border {
+  border-bottom: 1px solid var(--sv-black-15);
+}
+.sv-episode:last-child {
+  padding-bottom: var(--sv-sp-30);
+}
+
+.sv-episode__number {
+  flex-shrink: 0;
+  width: 30px;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--sv-grey-60);
+}
+
+.sv-episode__thumb {
+  position: relative;
+  flex-shrink: 0;
+  width: 172px;
+  height: 96px;
+  background: var(--sv-black-15);
+  border: 1px solid var(--sv-black-15);
+  border-radius: var(--sv-radius-xl);
+  overflow: hidden;
+}
+.sv-episode__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.sv-episode__thumb-placeholder {
+  width: 100%;
+  height: 100%;
+  background: var(--sv-black-20);
+}
+.sv-episode__play-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: inherit;
+}
+.sv-episode__play-overlay img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.sv-episode__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sv-sp-10);
+  flex: 1;
+  min-width: 0;
+}
+
+.sv-episode__title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sv-sp-16);
+  flex-wrap: wrap;
+}
+
+.sv-episode__title {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--sv-white);
+}
+
+.sv-episode__duration {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sv-sp-4);
+  padding: var(--sv-sp-6);
+  background: var(--sv-black-08);
+  border: 1px solid var(--sv-black-15);
+  border-radius: var(--sv-radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--sv-grey-60);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.sv-episode__duration img {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+.sv-episode__desc {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--sv-grey-60);
+}
+
+/* ======================================================================
+   DESCRIPTION
+   ====================================================================== */
+.sv-description {
+  padding: var(--sv-sp-40);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sv-sp-10);
+}
+
+.sv-description__text {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--sv-white);
+}
+
+/* ======================================================================
+   CAST
+   ====================================================================== */
+.sv-cast {
+  padding: var(--sv-sp-40);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sv-sp-20);
+}
+
+.sv-cast__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sv-sp-30);
+}
+
+.sv-cast__heading {
+  flex: 1;
+}
+
+/* We show the SVG image on desktop, hide custom buttons on desktop */
+.sv-cast__nav {
+  display: block;
+}
+.sv-cast__nav-btns {
+  display: none;
+}
+
+.sv-cast__photos {
+  display: flex;
+  gap: var(--sv-sp-10);
+  overflow: hidden;
+}
+
+.sv-cast__photo {
+  flex: 1;
+  min-width: 0;
+  border-radius: var(--sv-radius-lg);
+  overflow: hidden;
+  aspect-ratio: 1 / 1.1;
+  background: var(--sv-black-15);
+}
+.sv-cast__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ======================================================================
+   REVIEWS
+   ====================================================================== */
+.sv-reviews {
+  padding: var(--sv-sp-40);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sv-sp-30);
+}
+
+.sv-reviews__header {
+  display: flex;
+  align-items: center;
+  gap: var(--sv-sp-14);
+}
+
+.sv-reviews__heading {
+  flex: 1;
+}
+
+.sv-reviews__cards {
+  display: flex;
+  gap: var(--sv-sp-16);
+}
+
+.sv-review-card {
+  flex: 1;
+  background: var(--sv-black-06);
+  border: 1px solid var(--sv-black-15);
+  border-radius: var(--sv-radius-xl);
+  padding: var(--sv-sp-30);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sv-sp-16);
+}
+
+.sv-review-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sv-sp-14);
+}
+
+.sv-review-card__author {
+  display: flex;
+  flex-direction: column;
+}
+
+.sv-review-card__name {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--sv-white);
+}
+
+.sv-review-card__location {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--sv-grey-60);
+}
+
+.sv-review-card__rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px 8px;
+  background: var(--sv-black-08);
+  border: 1px solid var(--sv-black-15);
+  border-radius: 51px;
+  white-space: nowrap;
+}
+.sv-review-card__rating img {
+  display: block;
+}
+.sv-review-card__score {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--sv-grey-60);
+  margin-left: 4px;
+}
+
+.sv-review-card__text {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--sv-grey-60);
+}
+
+.sv-reviews__pagination {
+  display: flex;
+  justify-content: center;
+}
+.sv-reviews__pagination img {
+  display: block;
+}
+
+/* ======================================================================
+   SHOW DETAILS SIDEBAR
+   ====================================================================== */
+.sv-show-details {
+  padding: var(--sv-sp-40);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sv-sp-24);
+  position: sticky;
+  top: 88px; /* below sticky navbar */
+}
+
+.sv-detail-row {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--sv-sp-10);
+}
+
+.sv-detail-row__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--sv-grey-60);
+}
+.sv-detail-row__label img {
+  display: block;
+}
+
+.sv-detail-row__value {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--sv-white);
+}
+
+.sv-detail-row__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sv-sp-10);
+}
+
+/* Ratings cards (IMDb / Streamvibe) */
+.sv-ratings-cards {
+  display: flex;
+  gap: var(--sv-sp-16);
+}
+
+.sv-ratings-card {
+  flex: 1;
+  background: var(--sv-black-08);
+  border: 1px solid var(--sv-black-15);
+  border-radius: var(--sv-radius-md);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sv-ratings-card__name {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--sv-white);
+}
+
+.sv-ratings-card__stars {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--sv-white);
+}
+.sv-ratings-card__stars img {
+  display: block;
+}
+
+/* Person card (Director / Music) */
+.sv-person-card {
+  display: flex;
+  align-items: center;
+  gap: var(--sv-sp-8);
+  padding: var(--sv-sp-12);
+  background: var(--sv-black-08);
+  border: 1px solid var(--sv-black-15);
+  border-radius: var(--sv-radius-md);
+}
+
+.sv-person-card__img {
+  width: 47px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: var(--sv-radius-sm);
+  flex-shrink: 0;
+}
+
+.sv-person-card__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.sv-person-card__name {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--sv-white);
+}
+
+.sv-person-card__sub {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--sv-grey-60);
+}
+
+/* ======================================================================
+   CTA BANNER
+   ====================================================================== */
+.sv-cta {
+  position: relative;
+  margin: var(--sv-sp-80) var(--sv-page-px);
+  border-radius: var(--sv-radius-xl);
+  border: 1px solid var(--sv-black-15);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 240px;
+  padding: var(--sv-sp-80) var(--sv-sp-60);
+}
+
+/* Mosaic background grid */
+.sv-cta__bg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: stretch;
+}
+
+.sv-cta__grid {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: 100%;
+}
+
+.sv-cta__grid-cell {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+.sv-cta__grid-cell img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0.5;
+}
+
+/* Left gradient fade */
+.sv-cta__fade-left {
+  position: absolute;
+  top: 0;
+  left: -2px;
+  bottom: 0;
+  width: 60%;
+  background: linear-gradient(
+    90deg,
+    rgba(15, 15, 15, 1) 2%,
+    rgba(20, 15, 15, 0.97) 25%,
+    rgba(34, 14, 14, 0.91) 47%,
+    rgba(229, 0, 0, 0) 100%
+  );
+}
+
+/* CTA content above the background */
+.sv-cta__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sv-sp-10);
+  text-align: center;
+  max-width: 600px;
+}
+
+.sv-cta__heading {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--sv-white);
+}
+
+.sv-cta__subtext {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--sv-grey-60);
+}
+
+.sv-cta__btn {
+  margin-top: var(--sv-sp-8);
+}
+
+/* ======================================================================
+   FOOTER
+   ====================================================================== */
+.sv-footer {
+  background: var(--sv-black-06);
+}
+
+.sv-footer__inner {
+  max-width: var(--sv-max-width);
+  margin: 0 auto;
+  padding: var(--sv-sp-80) var(--sv-page-px) var(--sv-sp-40);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sv-sp-80);
+}
+
+.sv-footer__columns {
+  display: flex;
+  gap: var(--sv-sp-20);
+  flex-wrap: wrap;
+}
+
+.sv-footer__col {
+  flex: 1;
+  min-width: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sv-sp-20);
+}
+
+.sv-footer__col-heading {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--sv-white);
+}
+
+.sv-footer__col-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sv-sp-10);
+}
+
+.sv-footer__link {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--sv-grey-60);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.sv-footer__link:hover {
+  color: var(--sv-white);
+}
+.sv-footer__link:focus-visible {
+  outline: 2px solid var(--sv-white);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.sv-footer__bottom {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sv-sp-20);
+}
+
+.sv-footer__divider {
+  height: 1px;
+  background: var(--sv-black-15);
+}
+
+.sv-footer__bottom-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sv-sp-20);
+  flex-wrap: wrap;
+}
+
+.sv-footer__copy {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--sv-grey-60);
+}
+
+.sv-footer__legal {
+  display: flex;
+  align-items: center;
+  gap: var(--sv-sp-16);
+}
+
+.sv-footer__legal-link {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--sv-grey-60);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.sv-footer__legal-link:hover {
+  color: var(--sv-white);
+}
+.sv-footer__legal-link:focus-visible {
+  outline: 2px solid var(--sv-white);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.sv-footer__legal-divider {
+  width: 1px;
+  height: 14px;
+  background: var(--sv-black-15);
+  flex-shrink: 0;
+}
+
+/* ======================================================================
+   REDUCED MOTION
+   ====================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* ======================================================================
+   RESPONSIVE – Tablet (≤ 1200px)
+   ====================================================================== */
+@media (max-width: 1200px) {
+  :root {
+    --sv-page-px: 40px;
+  }
+
+  .sv-navbar__pill {
+    position: static;
+    transform: none;
+    flex-shrink: 0;
+  }
+
+  .sv-content-grid {
+    grid-template-columns: 1fr 360px;
+  }
+
+  .sv-show-details {
+    top: 80px;
+  }
+}
+
+/* ======================================================================
+   RESPONSIVE – Small Tablet (≤ 1024px)
+   ====================================================================== */
+@media (max-width: 1024px) {
+  .sv-content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sv-show-details {
+    position: static;
+  }
+
+  .sv-hero__text {
+    padding: 0 40px;
+  }
+
+  .sv-reviews__cards {
+    flex-direction: column;
+  }
+
+  .sv-cast__photos {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .sv-cast__photo {
+    min-width: 120px;
+    flex: 0 0 auto;
+  }
+}
+
+/* ======================================================================
+   RESPONSIVE – Mobile (≤ 768px)
+   ====================================================================== */
+@media (max-width: 768px) {
+  :root {
+    --sv-page-px: 20px;
+  }
+
+  /* Navbar */
+  .sv-navbar__pill {
+    display: none;
+  }
+  .sv-navbar__actions {
+    display: none;
+  }
+  .sv-navbar__hamburger {
+    display: flex;
+  }
+
+  /* Hero */
+  .sv-hero {
+    min-height: 420px;
+  }
+  .sv-hero__text {
+    padding: 0;
+  }
+  .sv-hero__title {
+    font-size: 22px;
+  }
+  .sv-hero__actions {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* Seasons */
+  .sv-seasons__season-header {
+    padding: var(--sv-sp-16) var(--sv-sp-20);
+  }
+  .sv-episodes {
+    padding: var(--sv-sp-20);
+  }
+  .sv-episode {
+    flex-wrap: wrap;
+    gap: var(--sv-sp-12);
+  }
+  .sv-episode__thumb {
+    width: 100%;
+    height: 180px;
+  }
+
+  /* Cast */
+  .sv-cast__nav {
+    display: none;
+  }
+  .sv-cast__nav-btns {
+    display: flex;
+    gap: var(--sv-sp-8);
+  }
+
+  /* CTA */
+  .sv-cta {
+    margin: var(--sv-sp-40) var(--sv-page-px);
+    padding: var(--sv-sp-40) var(--sv-sp-24);
+  }
+  .sv-cta__heading {
+    font-size: 22px;
+  }
+  .sv-cta__grid {
+    flex-wrap: wrap;
+  }
+  .sv-cta__grid-cell {
+    flex: 0 0 33.33%;
+  }
+
+  /* Footer */
+  .sv-footer__inner {
+    padding: var(--sv-sp-40) var(--sv-page-px) var(--sv-sp-24);
+    gap: var(--sv-sp-40);
+  }
+  .sv-footer__columns {
+    flex-direction: column;
+    gap: var(--sv-sp-32);
+  }
+  .sv-footer__col {
+    min-width: unset;
+  }
+  .sv-footer__bottom-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sv-sp-12);
+  }
+  .sv-footer__legal {
+    flex-wrap: wrap;
+    gap: var(--sv-sp-12);
+  }
+}
+
+/* ======================================================================
+   RESPONSIVE – Small Mobile (≤ 480px)
+   ====================================================================== */
+@media (max-width: 480px) {
+  .sv-hero__content {
+    padding: var(--sv-sp-24) var(--sv-page-px) var(--sv-sp-16);
+  }
+  .sv-navbar__inner {
+    padding: var(--sv-sp-16) var(--sv-page-px);
+  }
+  .sv-reviews__cards {
+    flex-direction: column;
+  }
+  .sv-footer__legal {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .sv-footer__legal-divider {
+    display: none;
+  }
+}

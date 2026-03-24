@@ -39,7 +39,6 @@ function Navbar({ darkMode, onToggleDarkMode }) {
         <ul
           id="navbar-menu"
           className={`navbar__menu${menuOpen ? ' navbar__menu--open' : ''}`}
-          role="list"
         >
           {['Blog', 'Projects', 'About', 'Newsletter'].map((item) => (
             <li key={item} className="navbar__item">

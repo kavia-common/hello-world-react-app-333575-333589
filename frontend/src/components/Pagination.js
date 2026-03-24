@@ -52,7 +52,7 @@ function Pagination({ totalPages = 10, initialPage = 1 }) {
       </button>
 
       {/* Page numbers */}
-      <ol className="pagination__numbers" role="list">
+      <ol className="pagination__numbers">
         {getPages().map((page, idx) =>
           page === '...' ? (
             <li key={`ellipsis-${idx}`} className="pagination__ellipsis" aria-hidden="true">
